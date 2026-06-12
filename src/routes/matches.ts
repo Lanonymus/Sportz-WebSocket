@@ -10,10 +10,10 @@ export const matchRouter = Router();
 const MAX_LIMIT = 100
 
 matchRouter.get("/", async (req: Request, res: Response) => {
-    const parsed = listMatchesQuerySchema.safeParse(req.body)
+    const parsed = listMatchesQuerySchema.safeParse(req.query)
 
     if (!parsed.success) {
-        return res.status(400).json({ error: "Invalid query", details: parsed.error})
+        return res.status(400).json({ error: "Invalid query", details: parsed.error.issues})
     }
     const limit = Math.min(parsed.data.limit ?? 50 , MAX_LIMIT)
     try {
@@ -32,7 +32,7 @@ matchRouter.post("/", async (req: Request, res: Response) => {
     const parsed = createMatchSchema.safeParse(req.body)
 
     if (!parsed.success) {
-        res.status(400).json({ error: `Invalid payload`, details: parsed.error})
+        res.status(400).json({ error: `Invalid payload`, details: parsed.error.issues})
         return
     }
 

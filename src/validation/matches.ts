@@ -10,9 +10,7 @@ export const listMatchesQuerySchema = z.object({
     limit: z.coerce.number().positive().max(100).optional()
 })
 
-const isoDateString = z.string().refine((val) => !isNaN(Date.parse(val)), {
-    message: "Invalid ISO date string"
-})
+const isoDateString = z.iso.datetime()
 
 // refined system to check if dates are correct TODO:
 // as well as endTime being after startTime
