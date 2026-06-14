@@ -6,7 +6,6 @@ import { Router } from "express"
 import type { Response, Request } from "express";
 
 export const matchRouter = Router();
-
 const MAX_LIMIT = 100
 
 matchRouter.get("/", async (req: Request, res: Response) => {

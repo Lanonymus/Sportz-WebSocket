@@ -17,10 +17,10 @@ const isoDateString = z.iso.datetime()
 
 export const matchIdParamSchema = z.object({
     id: z.coerce.number().positive(),
-    startTime: z.coerce.string(),
-    endTime: z.coerce.string(),
-    homeScore: z.coerce.number().nonnegative().optional(),
-    awayScore: z.coerce.number().nonnegative().optional()
+    // startTime: z.coerce.string().optional(),
+    // endTime: z.coerce.string().optional(),
+    // homeScore: z.coerce.number().nonnegative().optional(),
+    // awayScore: z.coerce.number().nonnegative().optional()
 })
 
 export const createMatchSchema = z.object({
