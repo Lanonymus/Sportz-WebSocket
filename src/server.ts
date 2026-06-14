@@ -4,6 +4,7 @@ import { matchRouter } from "./routes/matches"
 import dotenv from "dotenv"
 import http from "http"
 import { attachWebSocketServer } from "./ws/wsServer"
+import { securityMiddleware } from "./arcjet"
 
 dotenv.config()
 
@@ -12,7 +13,9 @@ const server = http.createServer(app)
 const PORT = Number(process.env.PORT || 8000)
 const HOST = process.env.HOST || "127.0.0.1"
 
-app.use(cors())
+
+app.use(cors()) // weryfikujące żądanie typu OPTIONS wygląda podejrzanie dla Arcjeta dlatego najpierw cors
+app.use(securityMiddleware())
 app.use(express.json())
 
 app.get("/", (req, res) => {
