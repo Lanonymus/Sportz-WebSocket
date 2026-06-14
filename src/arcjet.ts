@@ -1,5 +1,8 @@
 import arcjet, { detectBot, shield, slidingWindow } from "@arcjet/node"
 import { Request, Response, NextFunction } from "express";
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const arcjetKey = process.env.ARCJET_KEY
 const arcjetMode = process.env.ARCJET_MODE === "DRY_RUN" ? "DRY_RUN" : "LIVE"
@@ -39,7 +42,7 @@ export function securityMiddleware() {
                 if (decision.reason.isRateLimit()) {
                     return res.status(429).json({ error: "too many requests"})
                 }
-                return res.status(503).json({ error: "Forbidden"})
+                return res.status(403).json({ error: "Forbidden"})
             }
         } catch (e) {
             console.error("problem with Arcjet")

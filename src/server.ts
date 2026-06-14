@@ -14,8 +14,8 @@ const PORT = Number(process.env.PORT || 8000)
 const HOST = process.env.HOST || "127.0.0.1"
 
 
+app.use(cors()) // weryfikujące żądanie typu OPTIONS wygląda podejrzanie dla Arcjeta dlatego najpierw cors
 app.use(securityMiddleware())
-app.use(cors())
 app.use(express.json())
 
 app.get("/", (req, res) => {
